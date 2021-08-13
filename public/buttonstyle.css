@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #231C55;
+    border-color: #231C55;
+}
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:visited,
+.btn-danger:focus {
+    background-color: #EE6C4D;
+    border-color: #EE6C4D;
+}
+
+
+[class*=sidebar-dark-]
+{
+	background-color: #231c55;
+}
+[class*=sidebar-dark] .user-panel {
+  border-bottom: 1px solid #1F194D;
+}
+html, body {
+    font-family: "Poppins", sans-serif;
+}
