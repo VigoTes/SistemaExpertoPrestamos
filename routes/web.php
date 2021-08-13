@@ -1,7 +1,9 @@
 <?php
 
+use App\PrologExecuter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+//require_once(   dirname(__FILE__).'/../vendor/php-clips/php/clips.php' );
 
 
 /* RUTAS PARA INGRESO Y REGISTRO DE USUARIO Y CLIENTE */
@@ -16,18 +18,12 @@ Route::get('/cerrarSesion','UserController@cerrarSesion')->name('user.cerrarSesi
 
 
 Route::get('/probandoCosas',function(){
+	
+	//ejecutamos el comando
+	$exec = new PrologExecuter();
+	return "el output es:".$exec->ejecutarComando("test");
+	
 
-    clips_clear();
-	/* clips_set_strategy(LEX_STRATEGY);
-	clips_load("rules.clp");
-	clips_reset();
-	
-	clips_assert(array("hunter", "brian", "duck"));
-	
-	clips_run();
-	
-	$facts = clips_get_fact_list();
-	
-	print_r($facts); */
+ 
 
 });
