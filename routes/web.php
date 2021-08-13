@@ -19,7 +19,7 @@ Route::get('/cerrarSesion','UserController@cerrarSesion')->name('user.cerrarSesi
 
 Route::get('/probandoCosas',function(){
 	
-	//ejecutamos el comando
+	//ejecutamos el co mando
 	$exec = new PrologExecuter();
 	return "el output es:".$exec->ejecutarComando("test");
 	
