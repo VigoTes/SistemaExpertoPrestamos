@@ -1,0 +1,1 @@
+test :- write( 'Prolog was called from PHP successfully.' ).
