@@ -21,7 +21,7 @@ Route::get('/probandoCosas',function(){
 	
 	//ejecutamos el co mando
 	$exec = new PrologExecuter();
-	return "el output es:".$exec->ejecutarComando("test");
+	return "el output es:".$exec->ejecutarComando("calcularNivelPrestamo(40000).");
 	
 
  

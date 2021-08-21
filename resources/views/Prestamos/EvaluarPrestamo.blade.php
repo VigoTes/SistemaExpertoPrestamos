@@ -12,7 +12,7 @@
 
     
 
-<form id="frmExamen" name="frmExamen" role="form" action=" " 
+<form id="frmEvaluacion" name="frmEvaluacion" role="form" action=" " 
 class="form-horizontal form-groups-bordered" method="post" enctype="multipart/form-data">
 
 @csrf 
@@ -20,7 +20,7 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
 
 <div class="well">
     <H3 style="text-align: center;">
-        Nuevo Examen
+        Registrar nuevo prestamo
     </H3>
 </div>
 
@@ -40,26 +40,38 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
                     <div class="col">
 
                         
-                        <label class="" style="">Año:</label>
+                        <label class="" style="">DNI:</label>
                         
                         
                         <div class="">
-                            <input type="text" class="form-control" id="año" name="año" 
-                                value="" placeholder="Nombre..." >
+                            <input type="text" class="form-control" id="DNI" name="DNI" 
+                                value="" placeholder="DNI..." >
                         </div>
                     </div>
 
                     <div class="col">
+                        <label class="" style="">Nombre cliente:</label>
+                        <div class="row">
 
-                        
-                        <label class="" style="">Período:</label>
-                        
-                        
-                        <div class="">
-                            <input type="text" class="form-control" id="periodo" name="periodo" 
-                                value="" placeholder="2020-I" >
+                         
+                            <input style="width:50%"  type="text" class="form-control col" id="nombresApellidos" name="nombresApellidos" 
+                            value="" placeholder="Nombres y apellidos" readonly >
+
+
+                            <button   style="width:20%"  class="btn btn-success col-3 ml-2" type="button">
+                                <i class="fas fa-search"></i>
+                                Buscar
+                            </button>
+
                         </div>
+                       
+                        
+                      
+
                     </div>
+                    
+                    
+                    <div class="w-100"></div>
                     <div class="col">
 
                         
@@ -71,11 +83,8 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
 
                         </select>
                     </div>
-                    <div class="w-100"></div>
-                    
                     <div class="col">
 
-                        
                         <label class="" style="">Valoración CON+:</label>
                         
                         
@@ -222,7 +231,7 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
             return;
         }
         
-        document.frmExamen.submit(); // enviamos el formulario	
+        document.frmEvaluacion.submit(); // enviamos el formulario	
     }
 
     function validarFormulario(){
