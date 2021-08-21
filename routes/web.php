@@ -27,3 +27,7 @@ Route::get('/probandoCosas',function(){
  
 
 });
+
+Route::get('/Prestamos/VerEvaluar','PrestamoController@VerEvaluar')->name('Prestamos.VerEvaluar');
+
+
