@@ -2,15 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 
 class PrologExecuter  
 {
     
     public $rutaArchivoReglas = "C:/xampp/htdocs/SistemaExpertoPrestamos/prolog/prueba.pl";
-
-
-
 
 
     public function ejecutarComando($comandos){

@@ -129,9 +129,9 @@
 
     <ul class="navbar-nav ml-auto" style="margin-right:10%;">
       <!-- Messages Dropdown Menu --> {{-- VER CARRITO RAPIDAMENTE --}}
-      
+      <!--
       @include('Layout.Notificaciones.Solicitudes')
-      
+      -->
     </ul>
       
 
@@ -140,7 +140,9 @@
 
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu --> {{-- VER CARRITO RAPIDAMENTE --}}
+      <!--
         @include('Layout.Notificaciones.Usuario')
+      -->
     </ul>
       
 
@@ -162,34 +164,32 @@
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">SISTEMA WEB</span>
+      <span class="brand-text font-weight-light">SISTEMA EXPERTO</span>
     </a>
 
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      
-      
+      <!--
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="/img/usuario.png" class="img-circle elevation-2" alt="User Image">
         </div>
 
-      
-            <div class="info">
-              <a href="/verMisDatos" class="d-block"></a>
-             
-                <label for="" style="color: rgb(255, 255, 255))">
-                 Diego Vigo, Admin
-                </label>
-      
-            </div>
+        <div class="info">
+          <a href="/verMisDatos" class="d-block"></a>
+          
+          <label for="" style="color: rgb(255, 255, 255))">
+            Diego Vigo, Admin
+          </label>
+  
+        </div>
    
       </div>
-
+      -->
       
-<!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" 
           role="menu" data-accordion="false">
@@ -256,6 +256,8 @@
 
 <script src="/calendario/js/bootstrap-datepicker.js"></script>
 
+
+{{-- ESTE CODIGO QUE ONDA? --}}
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
