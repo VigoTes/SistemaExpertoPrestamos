@@ -3,7 +3,7 @@
 namespace GuzzleHttp\Promise;
 
 /**
- * Exceptio errors occur in the some() or any() methods.
+ * Exception thrown when too many errors occur in the some() or any() methods.
  */
 class AggregateException extends RejectionException
 {
