@@ -2,9 +2,11 @@ Actividades 1:
     ✔ Terminar prolog de reglas de intervalos @done(21-08-21 14:02)
     ✔ Diseñar BD con las tablas que se usaran @done(21-08-21 14:02)
     ☐ Terminar prolog con los facts de la tabla gigante
-    ☐ Diseño interfaz visual
+    ✔ Diseño interfaz visual @done(05-09-21 19:17)
     ☐ CRUD de Razones de crédito
-    ☐ Investigar conexión o API para consultar morosidad de INFOCORP
+    ☐ CRUD de persona y estado_persona para simular infocorp
+    ✔ Investigar conexión o API para consultar morosidad de INFOCORP NO SE PUEDE XD @done(05-09-21 19:17)
 
+    ☐ Hacer la api de conexion para evaluar prestamo
     
  

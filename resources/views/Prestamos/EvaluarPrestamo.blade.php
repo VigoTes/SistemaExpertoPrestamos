@@ -54,10 +54,11 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
                                             <div class="col">
                                                 <input type="text" class="form-control" id="DNI" name="DNI" value="" placeholder="DNI..." >
                                             </div>
-                                            <div class="col">
-                                                <button class="col btn btn-success" type="button">
+
+                                            <div class="col-4">
+                                                <button class="col btn btn-success" type="button" onclick="clickBuscarDNI()">
                                                     <i class="fas fa-search"></i>
-                                                    Buscar
+                                                    
                                                 </button>
                                             </div>
                                         </div>
@@ -145,7 +146,7 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
 
                     <div class="col" style=" text-align:center">
                         
-                        <button type="button" class="btn btn-primary float-right" id="btnRegistrar" data-loading-text="<i class='fa a-spinner fa-spin'></i> Registrando" 
+                        <button type="button" class="btn btn-primary" id="btnRegistrar" data-loading-text="<i class='fa a-spinner fa-spin'></i> Registrando" 
                             onclick="clickGuardar()">
                             <i class='fas fa-save'></i> 
                             Evaluar
@@ -209,6 +210,40 @@ class="form-horizontal form-groups-bordered" method="post" enctype="multipart/fo
 
     }
 
+
+    function clickBuscarDNI(){
+
+        dni = document.getElementById('DNI').value;
+        $.get('/consultarDNI/'+dni,
+            function(data)
+            {     
+                console.log("IMPRIMIENDO DATA como llegó:");
+                console.log(data);
+                
+                if(data==0){
+                    alerta("Persona no encontrada.");   
+                }else{
+                    console.log('DATA PARSEADA A JSON:')
+                    personaEncontrada =  (data)
+                    console.log(personaEncontrada);
+                    
+                    document.getElementById('nombresApellidos').value = 
+                        personaEncontrada.apellidoPaterno + " " + 
+                        personaEncontrada.apellidoMaterno + " " + 
+                        personaEncontrada.nombres;
+
+                }
+                
+                //$(".loader").fadeOut("slow");
+            }
+        );
+
+
+    }
+
+
+
+    function click
     
 </script>
 @endsection

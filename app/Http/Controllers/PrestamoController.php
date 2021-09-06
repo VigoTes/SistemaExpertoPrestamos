@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Configuracion;
 use App\Http\Controllers\Controller;
 use App\Prestamo;
 use App\RazonPrestamo;
@@ -17,7 +18,7 @@ class PrestamoController extends Controller
         return  view('Prestamos.EvaluarPrestamo',compact('listaRazonesPrestamo'));
     }
 
-
+    //se llama desde javascript
     public function Evaluar(Request $request){
 
         $dni = $request->dni;
@@ -48,5 +49,29 @@ class PrestamoController extends Controller
         return $evaluacionPrestamo;
 
     }
+
+    
+    public function ConsultarAPISunatDNI($dni){
+        
+                
+            $token = Configuracion::tokenParaAPISunat;
+            $linkConsulta = "https://dniruc.apisperu.com/api/v1/dni/".$dni."?token=".$token;
+            
+            $resultado = file_get_contents($linkConsulta);
+            
+
+            $vector =  json_decode($resultado, true);
+            if($vector['apellidoPaterno']!="")//si encontró
+                return $vector;
+            
+            return 0;
+
+    }
+
+
+    
+
+
+
 
 }

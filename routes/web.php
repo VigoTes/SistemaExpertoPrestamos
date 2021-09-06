@@ -31,3 +31,5 @@ Route::get('/probandoCosas',function(){
 Route::get('/Prestamos/VerEvaluar','PrestamoController@VerEvaluar')->name('Prestamos.VerEvaluar');
 
 Route::post('/Prestamos/EvaluarPrestamo','PrestamoController@Evaluar')->name('Prestamos.Evaluar');
+
+Route::get('/consultarDNI/{dni}','PrestamoController@ConsultarAPISunatDNI');
