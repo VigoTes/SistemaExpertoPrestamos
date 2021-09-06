@@ -14,7 +14,7 @@
         <a href="#" class="nav-link">
           <i class="far fa-building nav-icon"></i>
           <p>
-            PRIMER NIVEL
+            MATENEDORES
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
@@ -22,9 +22,9 @@
          
 
               <li class="nav-item">
-                <a href=" " class="nav-link">
+                <a href="{{route("Persona.listar")}}" class="nav-link">
                   <i class="far fa-address-card nav-icon"></i>
-                  <p>SUBNIVEL 1</p>
+                  <p>PERSONAS</p>
                 </a>
               </li>
            

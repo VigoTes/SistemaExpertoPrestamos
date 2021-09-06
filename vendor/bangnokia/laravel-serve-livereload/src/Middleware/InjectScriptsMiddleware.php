@@ -2,6 +2,7 @@
 
 namespace BangNokia\ServeLiveReload\Middleware;
 
+use App\Configuracion;
 use BangNokia\ServeLiveReload\Injector;
 use Closure;
 use Illuminate\Http\JsonResponse;
@@ -21,6 +22,7 @@ class InjectScriptsMiddleware
             && Str::startsWith($response->headers->get('Content-Type'), 'text/html')
             && !$request->isXmlHttpRequest()
             && !$response instanceof JsonResponse
+            && Configuracion::inyectar()
         ) {
             $response->setContent(
                 (new Injector())->injectScripts($response->getContent())

@@ -238,6 +238,11 @@
 
 <!-- jQuery -->
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+{{-- 
+<!-- PARA SOLUCIONAR EL PROBLEMA DE 'funcion(){' EN js--->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+ --}}
+
 <!-- Bootstrap 4 -->
 <script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -248,8 +253,6 @@
 
 <script src="/select2/bootstrap-select.min.js"></script>   
 
-<!-- PARA SOLUCIONAR EL PROBLEMA DE 'funcion(){' EN js--->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <!-- LIBRERIAS PARA NOTIFICACION DE ELIMINACION--->
 <script src="/adminlte/dist/js/sweetalert.min.js"></script>
@@ -258,16 +261,7 @@
 
 
 {{-- ESTE CODIGO QUE ONDA? --}}
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>    
-<script src="{{ asset('plugins/bootstrap-sweetalert/sweetalert.min.js') }}"></script>
-
-
-<script src="{{ asset('dist/js/admin/app.js') }}"></script>
  
-
 <script type="application/javascript">
 
   var menuLateralOcultado = true;

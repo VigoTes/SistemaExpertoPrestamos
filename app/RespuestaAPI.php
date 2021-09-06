@@ -24,10 +24,10 @@ class RespuestaAPI
 
     */
     //CUERPO debe ser un STRING
-    public static function respuestaOk($mensaje){
+    public static function respuestaOk($JSONvectorEvaluacion){
         return json_encode([
             'ok'=>'1',
-            'mensaje'=> $mensaje,
+            'mensaje'=> $JSONvectorEvaluacion,
             'titulo' => 'Enhorabuena',
             'tipoWarning' => 'success',
             'httpCode'=>'200'

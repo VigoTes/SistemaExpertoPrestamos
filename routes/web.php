@@ -30,6 +30,18 @@ Route::get('/probandoCosas',function(){
 
 Route::get('/Prestamos/VerEvaluar','PrestamoController@VerEvaluar')->name('Prestamos.VerEvaluar');
 
-Route::post('/Prestamos/EvaluarPrestamo','PrestamoController@Evaluar')->name('Prestamos.Evaluar');
+//invocable desde JS, Retorna un modal
+Route::get('/Prestamos/EvaluarPrestamo/','PrestamoController@Evaluar')->name('Prestamos.Evaluar');
+
+
+Route::post('/Prestamos/CrearPrestamo/','PrestamoController@CrearPrestamo')->name('Prestamos.Crear');
 
 Route::get('/consultarDNI/{dni}','PrestamoController@ConsultarAPISunatDNI');
+
+//PERSONA
+Route::get('/Persona/listar', 'PersonaController@listar')->name('Persona.listar');
+Route::get('/Persona/crear', 'PersonaController@crear')->name('Persona.crear');
+Route::post('/Persona/guardar', 'PersonaController@guardar')->name('Persona.guardar');
+Route::get('/Persona/{id}/editar', 'PersonaController@editar')->name('Persona.editar');
+Route::post('/Persona/update', 'PersonaController@update')->name('Persona.update');
+Route::get('/Persona/{id}/eliminar', 'PersonaController@eliminar')->name('Persona.eliminar');

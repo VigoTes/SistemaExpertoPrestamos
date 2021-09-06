@@ -1,10 +1,10 @@
 
 
 {{-- AQUI PONDRÉ EL CODIGO JAVASCRIPT PARA EL VALIDATOR
-    LO MOVERÉ AQUÍ PARA QUE SOLO LAS PAGINAS QUE NECESITEN EL VALIDATOR LO CARGUEN.
-    (antes lo tenia en un archivo javascript pero ocurren errores pq los navegadores no actualizan su cache (osea el archivo))
-    
-    --}}
+LO MOVERÉ AQUÍ PARA QUE SOLO LAS PAGINAS QUE NECESITEN EL VALIDATOR LO CARGUEN.
+(antes lo tenia en un archivo javascript pero ocurren errores pq los navegadores no actualizan su cache (osea el archivo))
+
+--}}
 
 <script>
 
@@ -50,7 +50,7 @@ function validarPuntoDecimal(msjError,id,nombreReferencial){
 
 
 var expRegNombres = new RegExp("^[A-Za-zÑñ À-ÿ]+$");//para apellidos y nombres ^[a-zA-Z ]+$ ^[A-Za-zÑñ À-ÿ]$
-          
+            
 function limpiarEstilos(listaInputs){
     listaInputs.forEach(element => {
 
@@ -68,8 +68,8 @@ function quitarElRojo(id){
     listaDeClases = listaDeClases.replace("form-control-undefined","form-control");
 
     document.getElementById(id).className = listaDeClases;
-     
-       
+        
+        
 }
 
 
@@ -129,6 +129,25 @@ function validarPositividad(msjError,id,nombreReferencial){
         return mensaje;
 }
 
+function validarNoNegatividad(msjError,id,nombreReferencial){
+    mensaje ="";
+
+    cantidad = document.getElementById(id).value;
+    cantidad=parseFloat(cantidad);
+    //console.log(cantidad);
+    if(cantidad<0){
+        ponerEnRojo(id);   
+        mensaje="El valor del campo '"+nombreReferencial+"' debe ser positivo.";
+    }
+
+    if(msjError!="") //significa que ya hay un error en el flujo de validaciones
+        return msjError; 
+    else //si no hay ningun error, retorna el mensaje generado en esta funcion (el cual será nulo si no hubo error)
+        return mensaje;
+
+
+}
+
 /* Valida si el contenido del id tiene nombres o apellidos validos */
 function validarRegExpNombres(msjError,id){
     mensaje = "";
@@ -152,7 +171,7 @@ function validarRegExpApellidos(msjError,id){
     contenido = document.getElementById(id).value;
     if (!expRegNombres.test(contenido)){
         ponerEnRojo(id);
-         
+            
         mensaje = "Ingrese apellidos válidos";
         
     }
@@ -198,7 +217,7 @@ function validarTamañoMaximo(msjError,id,tamañoMax,nombreReferencial){
     tamañoActual = contenido.length;
     if(tamañoActual > tamañoMax){
         ponerEnRojo(id);
-         
+            
         mensaje = "La longitud máxima del campo '" + nombreReferencial + "' es de " 
                 + tamañoMax + " caracteres. El tamaño actual es de " + tamañoActual + " caracteres.";
     }
@@ -289,7 +308,28 @@ function validarCodigoPresupuestal(msjError,id, codPresupProyecto,nombreReferenc
         ponerEnRojo(id);
         mensaje = "El "+nombreReferencial+" debe coincidir con el código presupuestal del proyecto [" + codPresupProyecto + "]. ";
     }
-   
+    
+    if(msjError!="") //significa que ya hay un error en el flujo de validaciones
+        return msjError; 
+    else //si no hay ningun error, retorna el mensaje generado en esta funcion (el cual será nulo si no hubo error)
+        return mensaje;
+
+}
+
+/* Se le pasa un vector de Strings, cada elemento es una id de un radio button */
+function validarGroupButton(msjError,vectorIDs,nombreReferencial){
+    mensaje = "";
+
+    algunoSeleccionado = false;
+    for (let index = 0; index < vectorIDs.length && !algunoSeleccionado; index++) {
+        const element = document.getElementById(vectorIDs[index]);
+        if(element.checked) algunoSeleccionado = true;
+    }
+
+    if(!algunoSeleccionado)
+        mensaje = "No ha seleccionado ningún " +  nombreReferencial + "."
+
+
     if(msjError!="") //significa que ya hay un error en el flujo de validaciones
         return msjError; 
     else //si no hay ningun error, retorna el mensaje generado en esta funcion (el cual será nulo si no hubo error)
@@ -298,5 +338,43 @@ function validarCodigoPresupuestal(msjError,id, codPresupProyecto,nombreReferenc
 }
 
 
+function invocarHtmlEnID(ruta,idElemento){
+    
+    $.get(ruta, function(data){                       
+            console.log('Se ha actualizado el objeto de id '+idElemento + ' con contenido invocado de  ' + ruta 
+            //   + ' con el siguiente contenido: ' + data
+            );
+            objeto = document.getElementById(idElemento);
+            objeto.innerHTML = data;
+        }
+    );
+
+}
+    
+
+    //  datos = {coche: "Ford", modelo: "Focus", color: "rojo"};
+function enviarPeticionPOST(ruta,datos){
+    
+
+}
+
+function cerrarModal(idModal){
+    $("#"+idModal+" .close").click()
+
+}
+
+    
+//GIRA UN ICONO 90 grados, se vale de las clases vaAGirar y rotado que están en editarProyecto
+function girarIcono(idIcono){    
+    //console.log('GIRANDO EL ' + idIcono);
+    elemento = document.querySelector('#'+idIcono);
+    estaGirado = elemento.classList.contains('rotado'); //booleano para ver si lo contiene
+
+    if(estaGirado)
+        elemento.classList.remove('rotado')
+    else
+        elemento.classList.add('rotado')
+
+}
 
 </script>
