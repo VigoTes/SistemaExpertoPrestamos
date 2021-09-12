@@ -12,7 +12,6 @@ Actividades 1:
     ✔ Login funcional FELIX @done(11-09-21 23:08)
     ☐ gestor de usuarios FELIX
     ✔ Diseño del Login (como si fuera el login de un banco) MARSKY @done(11-09-21 23:08)
-    
     ✔ Gestor para tasas de interes @done(08-09-21 10:28)
     ✔ CRUD de persona y estado_persona para simular infocorp @done(08-09-21 10:28)
     ✔ Investigar conexión o API para consultar morosidad de INFOCORP NO SE PUEDE XD @done(05-09-21 19:17)
@@ -30,3 +29,4 @@ Video explicando código:
     ☐ motor de razonamiento
     ☐ Consulta INFOCORP
     ☐ Consulta reniec
+

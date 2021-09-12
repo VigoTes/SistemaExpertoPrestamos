@@ -108,7 +108,8 @@ class UserController extends Controller
     public function home(){
         if(is_null(Auth::id()))
             return redirect()->route('user.verLogin');
- 
+        
+        return redirect()->route('Prestamos.Listar');
         return view('Bienvenido');
     }
 

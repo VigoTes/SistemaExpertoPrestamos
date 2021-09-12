@@ -126,10 +126,10 @@ class Prestamo extends Model
         
         $listaPersonas = Persona::where('dni','=',$dni)->get();
         if(count($listaPersonas) == 0){
-            return 'sin_antecedentes';
+            return EstadoPersona::getEstadoSinAntecedentes();
         }
         $persona = $listaPersonas[0];
-        return $persona->getEstado()->nombre;
+        return $persona->getEstado();
 
     }
 

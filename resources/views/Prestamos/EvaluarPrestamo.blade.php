@@ -107,13 +107,13 @@
                                         <div class="col">
                                             <label class="" style="">Ingresos:</label>
                                             <div class="">
-                                                <input type="number" class="form-control" id="ingresos" name="ingresos">
+                                                <input type="number" class="form-control text-right" id="ingresos" name="ingresos">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <label class="" style="">Egresos:</label>
                                             <div class="">
-                                                <input type="number" class="form-control" id="egresos" name="egresos">
+                                                <input type="number" class="form-control text-right" id="egresos" name="egresos">
                                             </div>
                                         </div>
                                         <div class="col">
@@ -134,24 +134,20 @@
                                         <div class="col">
                                             <label class="" style="">Respaldo inmueble:</label>
                                             <div class="">
-                                                <input type="number" class="form-control" id="respaldoInmueble" name="respaldoInmueble">
+                                                <input type="number" class="form-control text-right" id="respaldoInmueble" name="respaldoInmueble">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <label class="" style="">Respaldo capital:</label>
-                                        
-                                            <input type="number" class="form-control" id="respaldoCapital" name="respaldoCapital">
-                                            
+                                            <input type="number" class="form-control text-right" id="respaldoCapital" name="respaldoCapital">
                                         </div>
 
                                         <div class="w-100"></div>
                                         <div class="col text-center">
-                                            
                                                 <label class="" style="">Monto solicitado:</label>
-                                                <input type="number" class="form-control" id="importePrestamo" name="importePrestamo" >
-                                            
-                                            
+                                                <input type="number" class="form-control text-right" id="importePrestamo" name="importePrestamo" >
                                         </div>
+
                                         <div class="col">
                                             <label for="">
                                                 Cuotas
@@ -168,38 +164,26 @@
                                                 
                                         </div>
                                     </div>
-                                </div><!-- /.card-body -->
+                                </div> 
                             </div>
                         </div>
-                        
-                        {{-- 
-                            
-                            lino zanoni
-                            mejia miranda
-                            
-                            
-                            --}}
-                        
+                         
 
                         <div class="w-100"></div>
-
-                        <div class="col" style=" text-align:center">
-                            
-                            <button type="button" class="btn btn-primary" id="btnRegistrar" data-loading-text="<i class='fa a-spinner fa-spin'></i> Registrando" 
-                                onclick="clickEvaluar()">
+                        <div class="col text-left">
+                            <a class="btn btn-primary" href="{{route('Prestamos.Listar')}}">
+                                <i class="fas fa-backward"></i>
+                                Volver al listado
+                            </a>
+                        </div>
+                        <div class="col" style=" text-align:right">                            
+                            <button type="button" class="btn btn-success" id="btnRegistrar" 
+                                data-loading-text="<i class='fa a-spinner fa-spin'></i> Registrando" onclick="clickEvaluar()">
                                 <i class='fas fa-save'></i> 
                                 Evaluar
                             </button> 
-                            
-                            
-
-                            <!--
-                            <a href="" class='btn btn-info float-left'>
-                                <i class="fas fa-arrow-left"></i> 
-                                Regresar al Menú
-                            </a>
-                            -->
                         </div>
+                        
 
                     </div>
 

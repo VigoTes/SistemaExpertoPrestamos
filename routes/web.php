@@ -83,7 +83,11 @@ Route::group(['middleware'=>"ValidarSesion"],function()
 
 
 
+	Route::get('/yara/{cod}',function($dato){
+		return "hola si".$dato;
+		
 
+	});
 
 
 

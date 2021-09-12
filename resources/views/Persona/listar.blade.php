@@ -9,23 +9,14 @@
 <style>
   .col{
     margin-top: 15px;
-
     }
-
   .colLabel{
     width: 13%;
     margin-top: 18px;
-
-
   }
-
-
 </style>
-
-
-
 <div style="text-align: center">
-    <h2> Listar personas </h2>
+    <h2> Ver Antecedentes Infocorp  </h2>
     <br>
     
     <div class="row">
@@ -36,13 +27,7 @@
             </a>
         </div>
         <div class="col-md-10">
-            <!--
-                <form class="form-inline float-right">
-
-
-                <button class="btn btn-success " type="submit">Buscar</button>
-                </form>
-            -->
+            
         </div>
     </div>
     
@@ -65,29 +50,16 @@
             <tr>
                 <td>{{$itemPersona->codPersona}}</td>
                 <td>{{$itemPersona->dni}}</td>
-                <td>{{$itemPersona->getEstado()->nombre}}</td>
+                <td>{{$itemPersona->getEstado()->nombreParaVista}}</td>
                 <td>{{$itemPersona->montoAdeudado}}</td>
                 <td>{{$itemPersona->añoUltimaDeuda}}</td>
                 <td>
                     <a href="{{route("Persona.editar",$itemPersona->codPersona)}}" class="btn btn-warning btn-xs btn-icon icon-left">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a href="#" class="btn btn-danger btn-xs btn-icon icon-left" onclick="swal({//sweetalert
-                        title:'¿Está seguro de eliminar a la persona?',
-                        text: '',     //mas texto
-                        //type: 'warning',  
-                        type: '',
-                        showCancelButton: true,//para que se muestre el boton de cancelar
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText:  'SÍ',
-                        cancelButtonText:  'NO',
-                        closeOnConfirm:     true,//para mostrar el boton de confirmar
-                        html : true
-                    },
-                    function(){//se ejecuta cuando damos a aceptar
-                        window.location.href='{{route('Persona.eliminar',$itemPersona->codPersona)}}';
-                    });"><i class="fas fa-trash-alt"></i></a>
+                    <a href="#" class="btn btn-danger btn-xs btn-icon icon-left" 
+                        onclick="clickEliminarPersona({{$itemPersona->codPersona}},'{{$itemPersona->dni}}')">
+                    <i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         @endforeach
@@ -97,3 +69,21 @@
 </div>
 @endsection
 
+@section('script')
+
+@include('Layout.ValidatorJS')
+
+<script>
+
+    codPersonaAEliminar = 0;
+    function clickEliminarPersona(codPersona,dni){
+        codPersonaAEliminar = codPersona;
+        confirmarConMensaje("Confirmación","¿Desea eliminar a la persona ?","warning",ejecutarEliminarPersona);
+    }
+    function ejecutarEliminarPersona(){
+        window.location.href='/Persona/'+codPersonaAEliminar+'/eliminar';
+    }
+    
+</script>
+
+@endsection

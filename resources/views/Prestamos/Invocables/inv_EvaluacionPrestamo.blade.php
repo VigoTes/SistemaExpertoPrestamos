@@ -64,6 +64,17 @@
 
     </div>
     <div class="w-100"></div>
+
+    <div class="col">
+        <label for="">Antecedente crediticio:</label>
+        <input type="text" class="form-control" style="color:{{$estadoPersona->getColor()}}" value="{{$estadoPersona->nombreParaVista}}" readonly>
+
+    </div>
+    <div class="w-100"></div>
+
+    
+
+    
     <div class="col">
         <label for="">Decisión final:</label>
         <input type="text" class="form-control" value="{{$evaluacionPrestamo['condicionEvaluacionPrestamo']}}" readonly>

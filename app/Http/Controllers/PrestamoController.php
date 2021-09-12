@@ -57,7 +57,7 @@ class PrestamoController extends Controller
             $tasaRetorno = RazonPrestamo::findOrFail($codRazonCredito)->tasa;
              
             $plazo = PlazoPago::findOrFail($request->codPlazo);
-            $condicionMorosidad = Prestamo::buscarEnInfocorp($dni);
+            $estadoPersona = Prestamo::buscarEnInfocorp($dni); //retorna un objeto EstadoPersona
             
             $caracteristicas = [
                 'utilidad'=>$utilidad,
@@ -65,7 +65,7 @@ class PrestamoController extends Controller
                 'edad'=>$edad,
                 'tasaRetorno' => $tasaRetorno,
                 'patrimonioTotal' => $patrimonioTotal,
-                'condicionMorosidad'=> $condicionMorosidad
+                'condicionMorosidad'=> $estadoPersona->nombre
             ];     
             
             $evaluacionPrestamo = Prestamo::evaluarPrestamo($caracteristicas);
@@ -75,7 +75,8 @@ class PrestamoController extends Controller
             
             $listaCuotasPosibles = Prestamo::generarCuotas($plazo->valor,$importePrestamo,$tasaInteres);
             
-            return view('Prestamos.Invocables.inv_EvaluacionPrestamo',compact('evaluacionPrestamo','listaCuotasPosibles'));
+            return view('Prestamos.Invocables.inv_EvaluacionPrestamo',
+                compact('evaluacionPrestamo','listaCuotasPosibles','estadoPersona'));
         
         } catch (\Throwable $th) {
             Debug::mensajeError("prestam controller",$th);
