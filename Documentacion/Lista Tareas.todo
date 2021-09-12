@@ -1,12 +1,32 @@
 Actividades 1:
     ✔ Terminar prolog de reglas de intervalos @done(21-08-21 14:02)
     ✔ Diseñar BD con las tablas que se usaran @done(21-08-21 14:02)
-    ☐ Terminar prolog con los facts de la tabla gigante
+    ✔ Terminar prolog con los facts de la tabla gigante @done(08-09-21 10:28)
     ✔ Diseño interfaz visual @done(05-09-21 19:17)
-    ☐ CRUD de Razones de crédito
-    ☐ CRUD de persona y estado_persona para simular infocorp
-    ✔ Investigar conexión o API para consultar morosidad de INFOCORP NO SE PUEDE XD @done(05-09-21 19:17)
-
-    ☐ Hacer la api de conexion para evaluar prestamo
+    ✔ CRUD de Razones de prestamo VIGO @done(11-09-21 23:07)
+    ✔ Guardar prestamo VIGO @done(11-09-21 23:07)
+    ✔ Listar prestamos VIGO @done(11-09-21 23:07)
+    ✔ Ver prestamo VIGO @done(11-09-21 23:07)
+    ☐ Corregir el gráfico del informe VIGO
+    ☐ CRUD de plazos de pago FELIX
+    ✔ Login funcional FELIX @done(11-09-21 23:08)
+    ☐ gestor de usuarios FELIX
+    ✔ Diseño del Login (como si fuera el login de un banco) MARSKY @done(11-09-21 23:08)
     
- 
+    ✔ Gestor para tasas de interes @done(08-09-21 10:28)
+    ✔ CRUD de persona y estado_persona para simular infocorp @done(08-09-21 10:28)
+    ✔ Investigar conexión o API para consultar morosidad de INFOCORP NO SE PUEDE XD @done(05-09-21 19:17)
+    ✔ Hacer la api de conexion para evaluar prestamo @done(08-09-21 10:28)
+   
+Video funcionamiento externo:
+    Lo grabaremos con Meet, cada uno compartirá pantalla del sistema 
+    ☐ Introducción (para que sirve el software, usamos prolog con php, una API de consulta a reniec, simulacion de consulta a infocorp)
+    ☐ Login y gestor de usuarios 
+    ☐ Vista evaluar y generar prestamo 
+    ☐ Gráfico de razonamiento
+    ☐ Listar prestamos y ver estado de cada uno 
+Video explicando código:
+    ☐ Conexión con prolog
+    ☐ motor de razonamiento
+    ☐ Consulta INFOCORP
+    ☐ Consulta reniec

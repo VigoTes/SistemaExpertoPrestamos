@@ -25,7 +25,7 @@ class UserController extends Controller
             'password'=>'required',
         ],
         [
-            'usuario.required'=>'Ingrese E-mail', 
+            'usuario.required'=>'Ingrese usuario', 
             'password.required'=>'Ingrese Contraseña',
         ]);
             $usuario=$request->get('usuario');
@@ -106,9 +106,9 @@ class UserController extends Controller
 
 
     public function home(){
-       /*  if(is_null(Auth::id()))
+        if(is_null(Auth::id()))
             return redirect()->route('user.verLogin');
- */
+ 
         return view('Bienvenido');
     }
 

@@ -7,7 +7,18 @@
 
 @section('contenido')
 
-    
+@section('tiempoEspera')
+    <div class="loader" id="pantallaCarga">
+        <br>
+        <br>
+        <br>
+        
+        <br>
+        <br>
+        <br>
+        <h1 class="text-center" id="mensajeCarga" for=""></h1>
+    </div>
+@endsection
 
 
 
@@ -64,13 +75,13 @@
                                         <div class="col">
                                             <label class="" style="">Nombre:</label>
                                             <div class="">
-                                                <input type="text" class="form-control col" id="nombresApellidos" name="nombresApellidos" value="" placeholder="Nombres y apellidos" readonly >
+                                                <input type="text" class="form-control col" id="nombresApellidos" name="nombresApellidos" value="" readonly placeholder="Nombres y apellidos" >
                                             </div>
                                         </div>
                                         <div class="col-2">
                                             <label class="" style="">Edad:</label>
                                             <div class="">
-                                                <input type="number" class="form-control col" id="edad" name="edad" value="" placeholder="Edad">
+                                                <input type="number" class="form-control col" min="18" id="edad" name="edad" value="" placeholder="Edad">
                                             </div>
                                         </div>
                                     </div>
@@ -243,10 +254,22 @@
 </div>
  
 
+@endsection
+
+@section('script')
+
+
 @include('Layout.ValidatorJS')
 
 <script type="text/javascript"> 
           
+    $( document ).ready(function() {
+       
+         
+        $(".loader").fadeOut("slow");
+    });
+ 
+
     function clickEvaluar() 
     {
         msjError = validarFormulario();
@@ -263,7 +286,7 @@
         importeCapital = document.getElementById('respaldoCapital').value;
         importePrestamo = document.getElementById('importePrestamo').value;
         edad = document.getElementById('edad').value;
-        
+        codPlazo = document.getElementById('codPlazo').value;
 
         csrf = document.getElementsByName('_token')[0].value;
         
@@ -276,7 +299,8 @@
             importeInmuebles : importeInmuebles,
             importeCapital : importeCapital,
             importePrestamo : importePrestamo,
-            edad: edad
+            edad: edad,
+            codPlazo : codPlazo
         }; 
         ruta = "/Prestamos/EvaluarPrestamo/";
          
@@ -319,7 +343,22 @@
 
     function clickBuscarDNI(){
 
+        quitarElRojo('DNI');
+        
         dni = document.getElementById('DNI').value;
+        if(dni.length != 8){
+            alerta("El DNI debe contener 8 digitos.");
+            ponerEnRojo('DNI');
+            return;
+        }
+        
+        
+        $(".loader").fadeIn('slow');
+        document.getElementById('mensajeCarga').innerHTML = "Buscando persona...";
+
+        
+
+
         $.get('/consultarDNI/'+dni,
             function(data)
             {     
@@ -340,7 +379,9 @@
 
                 }
                 
-                //$(".loader").fadeOut("slow");
+                $(".loader").fadeOut("slow");
+                document.getElementById('mensajeCarga').innerHTML = "";
+        
             }
         );
 
@@ -369,4 +410,5 @@
 
 
 </script>
+
 @endsection

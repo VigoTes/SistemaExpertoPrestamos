@@ -73,17 +73,14 @@
     
 </div>
 
-@if(
-    true ||
-    $evaluacionPrestamo['condicionEvaluacionPrestamo'] == 'aprobado'
-)
+@if($evaluacionPrestamo['condicionEvaluacionPrestamo'] == 'aprobado')
         
 
     <div class="table-responsive divTablaFijada mt-2" >          
         <table id="tabla01" class="table table-striped table-bordered table-condensed table-hover table-sm fontSize11" style='background-color:#FFFFFF;'> 
             <thead class="filaFijada fondoAzul letrasBlancas">
                 <tr>
-                    <th>Ciclo</th>
+                    <th>Nro</th>
                     <th>Valor cuota</th>
                     <th>Interes pagado</th>
                     <th>Amortizacion</th>
@@ -95,23 +92,23 @@
             
                 @foreach($listaCuotasPosibles as $cuota)  
                     <tr>
-                        <td>
+                        <td class="text-right">
                             {{$cuota['item']}}
                         </td>
   
-                        <td>
+                        <td class="text-right">
                             {{$cuota['pago']}}
                         </td>
   
-                        <td>
+                        <td class="text-right">
                             {{$cuota['montoInteres']}}
                         </td>
   
-                        <td>
+                        <td class="text-right">
                             {{$cuota['montoAmortizacion']}}
                         </td>
   
-                        <td>
+                        <td class="text-right">
                             {{$cuota['saldoDeuda']}}
                         </td>
   
@@ -133,7 +130,7 @@
     <div class="row">
         <div class="col m-2 text-right">
 
-
+            
             <button type="button" class="btn btn-primary" id="btnRegistrar" data-loading-text="<i class='fa a-spinner fa-spin'></i> Registrando" 
                 onclick="clickGuardarPréstamo()">
                 <i class='fas fa-save'></i> 

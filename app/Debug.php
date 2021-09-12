@@ -74,4 +74,10 @@ class Debug extends Model
         return "_".$randomString;
     } 
 
+    public static function requestEnJS($request){
+        $request = json_encode($request->toArray());
+        return "$request <script> console.log(JSON.parse('$request'))</script>";
+
+    }
+
 }

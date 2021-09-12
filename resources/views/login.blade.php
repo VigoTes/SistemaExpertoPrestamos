@@ -2,8 +2,8 @@
 <html>
 <head>
 	 <meta charset="utf-8"/>
-     <title>CEDEPAS Norte | Login</title>
-	 <link rel="shortcut icon" href="/img/LogoCedepas.png" type="image/png">
+     <title>PrestaMax | Login</title>
+	 <link rel="shortcut icon" href="/img/logoprestamax.png" type="image/png">
   
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>      
@@ -97,8 +97,8 @@
 	
 			</div>
 			<div style="text-align: center">
-				<img src="/img/LogoCedepas.png"
-				width="200" height="140" >
+				<img src="/img/PrestaMax.png"
+				width="200" height="160" >
 			</div>
 		</div>
 		

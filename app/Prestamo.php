@@ -40,7 +40,7 @@ class Prestamo extends Model
     public static function evaluarPrestamo($caracteristicas){
         
         $motor = new PrologExecuter();
-
+        
         $condicionMorosidad = $caracteristicas['condicionMorosidad'];
 
         $nivelUtilidades = $motor->ejecutarComando("calcularNivelUtilidades(".$caracteristicas['utilidad'].").");
@@ -123,7 +123,68 @@ class Prestamo extends Model
     }
 
     public static function buscarEnInfocorp($dni){
-        return "sin_antecedentes";
+        
+        $listaPersonas = Persona::where('dni','=',$dni)->get();
+        if(count($listaPersonas) == 0){
+            return 'sin_antecedentes';
+        }
+        $persona = $listaPersonas[0];
+        return $persona->getEstado()->nombre;
+
     }
 
+
+    public function getCantidadCuotasTotal(){
+        $plazo = PlazoPago::findOrFail($this->codPlazo);
+        return $plazo->valor;
+    }
+
+    public function getCantidadCuotasPagadas(){
+        $listaCuotasPagadas = Cuota::where('codPrestamo','=',$this->codPrestamo)->where('pagado','=','1')->get();
+        return count($listaCuotasPagadas);
+    }
+
+    public function getMontoRealPagado(){
+        $listaCuotasPagadas = Cuota::where('codPrestamo','=',$this->codPrestamo)->where('pagado','=','1')->get();
+        $sum = 0;
+        foreach ($listaCuotasPagadas as $cuota){
+            $sum += $cuota->montoAmortizacion;
+        }
+        return $sum;
+    }
+
+    public function getPorcentajePagado(){
+        $total = $this->montoPrestado;
+        $pagado = $this->getMontoRealPagado();
+        return number_format(100*$pagado/$total,2);
+    }
+
+    public function getColorPorcentajePagado(){
+        $porcentaje = $this->getPorcentajePagado();
+        if($porcentaje<30){
+            return "red";
+        }
+        if($porcentaje<66)
+            return "yello";
+
+        return "green";
+
+    }
+
+    //retorna "6 meses"
+    public function getPlazoEscrito(){
+        $plazo = PlazoPago::findOrFail($this->codPlazo);
+        return $plazo->valor." ".$plazo->unidadTiempo;
+    }
+
+    public function getFechaHora(){
+
+        return Fecha::formatoParaVistas($this->fechaHoraPrestamo);
+    }
+
+    public function getCodigoDigitado(){
+        $number = $this->codPrestamo;
+        $length = 5;
+        return substr(str_repeat(0, $length).$number, - $length);
+    }
 }

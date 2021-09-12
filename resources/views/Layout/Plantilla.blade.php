@@ -8,7 +8,7 @@
 
   {{-- Cambiar esto por una url d --}}
 
-  <link rel="shortcut icon" href="/img/LogoCedepas.png" type="image/png">
+  <link rel="shortcut icon" href="/img/logoprestamax.ico" type="image/png">
   
   
   <!-- Tell the browser to be responsive to screen width -->
@@ -140,9 +140,9 @@
 
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu --> {{-- VER CARRITO RAPIDAMENTE --}}
-      <!--
+      
         @include('Layout.Notificaciones.Usuario')
-      -->
+      
     </ul>
       
 
@@ -160,7 +160,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('user.home') }}" class="brand-link">
-      <img src="/img/logo cuadrado.png"
+      <img src="/img/logoPrestaMax.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -171,7 +171,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <!--
+      
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="/img/usuario.png" class="img-circle elevation-2" alt="User Image">
@@ -181,13 +181,13 @@
           <a href="/verMisDatos" class="d-block"></a>
           
           <label for="" style="color: rgb(255, 255, 255))">
-            Diego Vigo, Admin
+            {{  (App\Usuario::getUsuarioLogeado()->usuario ) }}
           </label>
   
         </div>
    
       </div>
-      -->
+      
       
       <!-- Sidebar Menu -->
       <nav class="mt-2">
