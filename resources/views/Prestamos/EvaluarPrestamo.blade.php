@@ -315,8 +315,8 @@
 
         msjError = validarSelect(msjError,'codPlazo','-1','Cuotas');
         msjError = validarSelect(msjError,'razonCredito','-1','Razon de Credito');
-        msjError = validarPositividadYNulidad(msjError,'respaldoInmueble','Respaldo Inmueble');
-        msjError = validarPositividadYNulidad(msjError,'respaldoCapital','Respaldo Capital');
+        msjError = validarNoNegatividad(msjError,'respaldoInmueble','Respaldo Inmueble');
+        msjError = validarNoNegatividad(msjError,'respaldoCapital','Respaldo Capital');
          
         return msjError;
 
@@ -324,16 +324,15 @@
 
 
     function clickBuscarDNI(){
-
-        quitarElRojo('DNI');
-        
-        dni = document.getElementById('DNI').value;
-        if(dni.length != 8){
-            alerta("El DNI debe contener 8 digitos.");
-            ponerEnRojo('DNI');
+        limpiarEstilos(['DNI']);
+        msjError ="";
+        msjError = validarTamañoExacto(msjError,'DNI',8,'DNI');
+        if( msjError != ""){
+            alerta(msjError);
             return;
         }
-        
+
+        dni = document.getElementById('DNI').value;
         
         abrirVentanaCarga("Buscando persona...");
         

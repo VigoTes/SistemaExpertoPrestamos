@@ -1,6 +1,6 @@
 test :- write( 'Prolog ha sido llamado exitosamente.' ). 
 
-% TODO EN MASCULINO Y MINUSCULAS
+% TODO EN MASCULINO Y MINUSCULAS y singular
 
 %NivelPrestamo
     calcularNivelPrestamo(IMPORTE):-
@@ -121,7 +121,7 @@ test :- write( 'Prolog ha sido llamado exitosamente.' ).
     evaluarPrestamo(_,_,'muy_alto'):-
         write('no_aprobado').
 % LOS CRÉDITOS muy_altoS (MAYORES A 50 000 NO APROBAMOS)
-    
+
 
 
 % TABLA GRANDE DE CAPACIDAD FINANCIERA
