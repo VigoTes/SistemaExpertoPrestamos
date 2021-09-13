@@ -86,8 +86,8 @@
 
     </div>
     <div class="col">
-        <label for="">Riesgo de no retorno:</label>
-        <input type="text" class="form-control" value="{{$evaluacionPrestamo['riesgoNoRetorno']}}" readonly>
+        <label for="">Nivel de retorno:</label>
+        <input type="text" class="form-control" value="{{$evaluacionPrestamo['nivelRetorno']}}" readonly>
 
     </div>
     <div class="w-100"></div>

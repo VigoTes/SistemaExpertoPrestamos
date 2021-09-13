@@ -20,22 +20,28 @@ test :- write( 'Prolog ha sido llamado exitosamente.' ).
         !.
     calcularNivelPrestamo(IMPORTE):-
         IMPORTE>=50000,
-        write('altisimo').
+        write('muy_alto').
 
 
 %Nivel utilidades
     calcularNivelUtilidades(UTILIDAD):-
-        UTILIDAD<10000,
+        UTILIDAD<(-1000),
+        write('muy_bajo'),
+        !.
+    calcularNivelUtilidades(UTILIDAD):-
+        UTILIDAD<2000,
         write('bajo'),
         !.
     calcularNivelUtilidades(UTILIDAD):-
-        UTILIDAD<15000,
-        UTILIDAD>10000,
+        UTILIDAD<5000,
+        UTILIDAD>=2000,
         write('medio'),
         !.
     calcularNivelUtilidades(UTILIDAD):-
-        UTILIDAD>=15000,
+        UTILIDAD>=7000,
         write('alto').
+
+        
 
 % REISGO POR EDAD
     calcularRiesgoPorEdad(EDAD):-
@@ -53,16 +59,16 @@ test :- write( 'Prolog ha sido llamado exitosamente.' ).
 
 
 % TASA PROBABLE DE RETORNO
-    calcularRiesgoNoRetorno(TASARETORNO):-
+    calcularNivelRetorno(TASARETORNO):-
         TASARETORNO=<0.01,
         write('alto'),
         !.
-    calcularRiesgoNoRetorno(TASARETORNO):-
+    calcularNivelRetorno(TASARETORNO):-
         TASARETORNO<0.05,
         TASARETORNO>0.01,
         write('regular'),
         !.
-    calcularRiesgoNoRetorno(TASARETORNO):-
+    calcularNivelRetorno(TASARETORNO):-
         TASARETORNO>=0.05,
         write('bajo').
 
@@ -82,21 +88,25 @@ test :- write( 'Prolog ha sido llamado exitosamente.' ).
 
 
 % CAPACIDAD FINANCIERA
-    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno):-
-        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno,'pequeno'),
+    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno):-
+        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno,'pequeno'),
         write('pequeno'),
         !.
-    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno):-
-        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno,'mediano'),
+    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno):-
+        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno,'mediano'),
         write('mediano'),
         !.
-    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno):-
-        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno,'grande'),
+    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno):-
+        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno,'grande'),
         write('grande'),
         !.
-    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno):-
-        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,RiesgoNoRetorno,'muy_grande'),
-        write('muy_grande').
+    calcularCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno):-
+        tablaCapacidadFinanciera(NivelUtilidades,CondicionMorosidad,NivelRiesgoPorEdad,NivelRetorno,'muy_grande'),
+        write('muy_grande'),
+        !.
+    calcularCapacidadFinanciera('muy_bajo',_,_,_):-
+        write('pequeno').
+        
 
 % decision final
 
@@ -108,9 +118,9 @@ test :- write( 'Prolog ha sido llamado exitosamente.' ).
         tablaDecisionCompleta(NivelRespaldoFinanciero,NivelCapacidadFinanciera,NivelPrestamo,'no_aprobado'),
         write('no_aprobado'),
         !.
-    evaluarPrestamo(_,_,'altisimo'):-
+    evaluarPrestamo(_,_,'muy_alto'):-
         write('no_aprobado').
-% LOS CRÉDITOS ALTISIMOS (MAYORES A 50 000 NO APROBAMOS)
+% LOS CRÉDITOS muy_altoS (MAYORES A 50 000 NO APROBAMOS)
     
 
 

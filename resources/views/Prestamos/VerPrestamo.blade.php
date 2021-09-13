@@ -115,8 +115,8 @@
                         <input type="text" class="form-control" readonly  value="{{$prestamo->evaluacion_riesgoPorEdad}}">
                     </div>
                     <div class="col">
-                        <label for="">Riesgo de no retorno</label>
-                        <input type="text" class="form-control" readonly  value="{{$prestamo->evaluacion_riesgoNoRetorno}}">
+                        <label for="">Nivel de retorno</label>
+                        <input type="text" class="form-control" readonly  value="{{$prestamo->evaluacion_nivelRetorno}}">
                     </div>
                     <div class="w-100"></div>
 

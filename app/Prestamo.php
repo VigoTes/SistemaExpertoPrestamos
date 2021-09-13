@@ -46,11 +46,11 @@ class Prestamo extends Model
         $nivelUtilidades = $motor->ejecutarComando("calcularNivelUtilidades(".$caracteristicas['utilidad'].").");
         
         $riesgoPorEdad = $motor->ejecutarComando("calcularRiesgoPorEdad(".$caracteristicas['edad'].").");
-        $riesgoNoRetorno = $motor->ejecutarComando("calcularRiesgoNoRetorno(".$caracteristicas['tasaRetorno'].").");
+        $nivelRetorno = $motor->ejecutarComando("calcularNivelRetorno(".$caracteristicas['tasaRetorno'].").");
          
         
         $nivelPrestamo = $motor->ejecutarComando("calcularNivelPrestamo(".$caracteristicas['importePrestamo'].").");
-        $nivelCapacidadFinanciera = $motor->ejecutarComando("calcularCapacidadFinanciera('$nivelUtilidades','$condicionMorosidad','$riesgoPorEdad','$riesgoNoRetorno').");
+        $nivelCapacidadFinanciera = $motor->ejecutarComando("calcularCapacidadFinanciera('$nivelUtilidades','$condicionMorosidad','$riesgoPorEdad','$nivelRetorno').");
         $nivelRespaldoFinanciero = $motor->ejecutarComando("calcularRespaldoFinanciero(".$caracteristicas['patrimonioTotal'].").");
 
         //respaldo,capacidad,nivel   
@@ -59,7 +59,7 @@ class Prestamo extends Model
         return [
             'nivelUtilidades' => $nivelUtilidades,
             'riesgoPorEdad' => $riesgoPorEdad,
-            'riesgoNoRetorno' => $riesgoNoRetorno,
+            'nivelRetorno' => $nivelRetorno,
 
             'nivelPrestamo' => $nivelPrestamo,
             'nivelCapacidadFinanciera' => $nivelCapacidadFinanciera,

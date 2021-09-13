@@ -147,7 +147,7 @@ CREATE TABLE `prestamo` (
   `codPlazo` int(11) NOT NULL,
   `evaluacion_nivelUtilidades` varchar(100) NOT NULL,
   `evaluacion_riesgoPorEdad` varchar(100) NOT NULL,
-  `evaluacion_riesgoNoRetorno` varchar(100) NOT NULL,
+  `evaluacion_nivelRetorno` varchar(100) NOT NULL,
   `evaluacion_nivelPrestamo` varchar(100) NOT NULL,
   `evaluacion_nivelCapacidadFinanciera` varchar(100) NOT NULL,
   `evaluacion_nivelRespaldoFinanciero` varchar(100) NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE `prestamo` (
 -- Volcado de datos para la tabla `prestamo`
 --
 
-INSERT INTO `prestamo` (`codPrestamo`, `cliente_dni`, `cliente_nombres`, `cliente_utilidad`, `cliente_edad`, `cliente_patrimonioTotal`, `cliente_ingresos`, `cliente_egresos`, `montoPrestado`, `codRazon`, `valorCuota`, `montoPagado`, `codTasaInteres`, `codPlazo`, `evaluacion_nivelUtilidades`, `evaluacion_riesgoPorEdad`, `evaluacion_riesgoNoRetorno`, `evaluacion_nivelPrestamo`, `evaluacion_nivelCapacidadFinanciera`, `evaluacion_nivelRespaldoFinanciero`, `saldoRestante`, `fechaHoraCreacion`, `evaluacion_condicionEvaluacionPrestamo`) VALUES
+INSERT INTO `prestamo` (`codPrestamo`, `cliente_dni`, `cliente_nombres`, `cliente_utilidad`, `cliente_edad`, `cliente_patrimonioTotal`, `cliente_ingresos`, `cliente_egresos`, `montoPrestado`, `codRazon`, `valorCuota`, `montoPagado`, `codTasaInteres`, `codPlazo`, `evaluacion_nivelUtilidades`, `evaluacion_riesgoPorEdad`, `evaluacion_nivelRetorno`, `evaluacion_nivelPrestamo`, `evaluacion_nivelCapacidadFinanciera`, `evaluacion_nivelRespaldoFinanciero`, `saldoRestante`, `fechaHoraCreacion`, `evaluacion_condicionEvaluacionPrestamo`) VALUES
 (1, '71208489', 'VIGO BRIONES DIEGO ERNESTO', -38964, 25, 0, 12251, 51215, 15221200, 6, 0, 0, 2, 1, 'bajo', 'suficiente', 'alto', 'alto', 'mediano', 'poco', 15221200, '2021-09-12 00:58:14', 'no_aprobado'),
 (2, '71208489', 'VIGO BRIONES DIEGO ERNESTO', -38964, 25, 0, 12251, 51215, 15221200, 6, 0, 0, 2, 1, 'bajo', 'suficiente', 'alto', 'alto', 'mediano', 'poco', 15221200, '2021-09-12 00:58:54', 'no_aprobado'),
 (3, '71208489', 'VIGO BRIONES DIEGO ERNESTO', -38743, 51, 0, 12512, 51255, 2511, 2, 0, 0, 2, 1, 'bajo', 'suficiente', 'alto', 'bajo', 'mediano', 'poco', 2511, '2021-09-12 04:04:47', 'aprobado'),

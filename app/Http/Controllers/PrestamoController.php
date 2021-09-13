@@ -72,7 +72,7 @@ class PrestamoController extends Controller
             /* 
                 'nivelUtilidades' => $nivelUtilidades,
                 'riesgoPorEdad' => $riesgoPorEdad,
-                'riesgoNoRetorno' => $riesgoNoRetorno,
+                'nivelRetorno' => $nivelRetorno,
 
                 'nivelPrestamo' => $nivelPrestamo,
                 'nivelCapacidadFinanciera' => $nivelCapacidadFinanciera,
@@ -149,7 +149,7 @@ class PrestamoController extends Controller
             /* 
             'nivelUtilidades' => $nivelUtilidades,
             'riesgoPorEdad' => $riesgoPorEdad,
-            'riesgoNoRetorno' => $riesgoNoRetorno,
+            'nivelRetorno' => $nivelRetorno,
             'nivelPrestamo' => $nivelPrestamo,
             'nivelCapacidadFinanciera' => $nivelCapacidadFinanciera,
             'nivelRespaldoFinanciero' => $nivelRespaldoFinanciero,
@@ -174,7 +174,7 @@ class PrestamoController extends Controller
 
             $prestamo->evaluacion_nivelUtilidades = $evaluacionPrestamo['nivelUtilidades'];
             $prestamo->evaluacion_riesgoPorEdad = $evaluacionPrestamo['riesgoPorEdad'];
-            $prestamo->evaluacion_riesgoNoRetorno = $evaluacionPrestamo['riesgoNoRetorno'];
+            $prestamo->evaluacion_nivelRetorno = $evaluacionPrestamo['nivelRetorno'];
             $prestamo->evaluacion_nivelPrestamo = $evaluacionPrestamo['nivelPrestamo'];
             $prestamo->evaluacion_nivelCapacidadFinanciera = $evaluacionPrestamo['nivelCapacidadFinanciera'];
             $prestamo->evaluacion_nivelRespaldoFinanciero = $evaluacionPrestamo['nivelRespaldoFinanciero'];
