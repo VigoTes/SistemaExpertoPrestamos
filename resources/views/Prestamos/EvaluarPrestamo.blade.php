@@ -207,7 +207,7 @@
 </form>
 
 <div class="modal fade" id="ModalEvaluacionPrestamo" tabindex="-1" aria-labelledby="" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             
 
@@ -254,8 +254,7 @@
     });
  
 
-    function clickEvaluar() 
-    {
+    function clickEvaluar(){
         msjError = validarFormulario();
         if(msjError!=""){
             alerta(msjError);
@@ -288,17 +287,16 @@
         }; 
         ruta = "/Prestamos/EvaluarPrestamo/";
          
+        abrirVentanaCarga("Evaluando préstamo...");
         $.get(ruta, datosAEnviar, function(dataRecibida){
             console.log('DATA RECIBIDA:');
             console.log(dataRecibida);
-            
+
             body = document.getElementById('cuerpoModal').innerHTML = dataRecibida;
             $('#ModalEvaluacionPrestamo').modal('show')
-
+            cerrarVentanaCarga();
         });
-
-         
-
+ 
     }
 
     function validarFormulario(){
@@ -337,42 +335,40 @@
         }
         
         
-        $(".loader").fadeIn('slow');
-        document.getElementById('mensajeCarga').innerHTML = "Buscando persona...";
-
+        abrirVentanaCarga("Buscando persona...");
         
-
-
         $.get('/consultarDNI/'+dni,
             function(data)
             {     
                 console.log("IMPRIMIENDO DATA como llegó:");
-                console.log(data);
                 
-                if(data==0){
-                    alerta("Persona no encontrada.");   
+                objetoRespuesta = JSON.parse(data);
+                console.log(objetoRespuesta);
+                if(objetoRespuesta.ok=='1'){
+                    alertaMensaje(objetoRespuesta.titulo,"Se encontró a " + objetoRespuesta.mensaje,objetoRespuesta.tipoWarning);
+                    document.getElementById('nombresApellidos').value = objetoRespuesta.mensaje;
                 }else{
-                    console.log('DATA PARSEADA A JSON:')
-                    personaEncontrada =  (data)
-                    console.log(personaEncontrada);
-                    
-                    document.getElementById('nombresApellidos').value = 
-                        personaEncontrada.apellidoPaterno + " " + 
-                        personaEncontrada.apellidoMaterno + " " + 
-                        personaEncontrada.nombres;
-
+                    alerta("No se ha encontrado a la persona.");
                 }
+                cerrarVentanaCarga();
                 
-                $(".loader").fadeOut("slow");
-                document.getElementById('mensajeCarga').innerHTML = "";
-        
             }
         );
 
 
     }
 
+    function abrirVentanaCarga(mensajeCarga){
+        $(".loader").fadeIn('slow');
+        document.getElementById('mensajeCarga').innerHTML = mensajeCarga;
+    }
 
+    function cerrarVentanaCarga(){
+        $(".loader").fadeOut("slow");
+        document.getElementById('mensajeCarga').innerHTML = "";
+            
+
+    }
  
     
 </script>

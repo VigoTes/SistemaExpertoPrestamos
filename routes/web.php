@@ -47,6 +47,14 @@ Route::group(['middleware'=>"ValidarSesion"],function()
 
 	Route::get('/consultarDNI/{dni}','PrestamoController@ConsultarAPISunatDNI');
 
+	//USUARIO
+	Route::get('/Usuario/listar', 'UsuarioController@listar')->name('Usuario.listar');
+	Route::get('/Usuario/crear', 'UsuarioController@crear')->name('Usuario.crear');
+	Route::post('/Usuario/guardar', 'UsuarioController@guardar')->name('Usuario.guardar');
+	Route::get('/Usuario/{id}/editar', 'UsuarioController@editar')->name('Usuario.editar');
+	Route::post('/Usuario/update', 'UsuarioController@update')->name('Usuario.update');
+	Route::get('/Usuario/{id}/eliminar', 'UsuarioController@eliminar')->name('Usuario.eliminar');
+
 	//PERSONA
 	Route::get('/Persona/listar', 'PersonaController@listar')->name('Persona.listar');
 	Route::get('/Persona/crear', 'PersonaController@crear')->name('Persona.crear');

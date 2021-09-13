@@ -39,7 +39,7 @@
                                 <tr>
                                     <th class="text-center">idBD</th>
                                     <th>Nombre</th>
-                                    <th class="text-center" >Tasa</th>
+                                    <th class="text-center" >Tasa de retorno</th>
                                     <th  class="text-center">Opciones</th>
                                 </tr>
                             </thead>

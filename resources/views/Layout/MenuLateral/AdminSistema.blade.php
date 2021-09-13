@@ -20,23 +20,28 @@
         </a>
         <ul class="nav nav-treeview">
          
-
+              <li class="nav-item">
+                <a href="{{route('Usuario.listar')}}" class="nav-link">
+                  <i class="far fa-address-card nav-icon"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{route("Persona.listar")}}" class="nav-link">
                   <i class="far fa-address-card nav-icon"></i>
-                  <p>PERSONAS</p>
+                  <p>Personas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route("TasaInteres.listar")}}" class="nav-link">
                   <i class="far fa-address-card nav-icon"></i>
-                  <p>TASAS</p>
+                  <p>Tasas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route("PlazoPago.listar")}}" class="nav-link">
                   <i class="far fa-address-card nav-icon"></i>
-                  <p>PLAZOS</p>
+                  <p>Plazos de Pago</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -45,6 +50,7 @@
                   <p>Razón de prestamo</p>
                 </a>
               </li>
+              
               
               
             

@@ -179,7 +179,7 @@ class Prestamo extends Model
 
     public function getFechaHora(){
 
-        return Fecha::formatoParaVistas($this->fechaHoraPrestamo);
+        return Fecha::formatoFechaHoraParaVistas($this->fechaHoraCreacion);
     }
 
     public function getCodigoDigitado(){

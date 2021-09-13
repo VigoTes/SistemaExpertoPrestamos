@@ -13,13 +13,14 @@ use App\RespuestaAPI;
 use App\TasaInteres;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PrestamoController extends Controller
 {
 
     public function listarPrestamos(){
 
-        $listaPrestamos = Prestamo::All();
+        $listaPrestamos = Prestamo::orderBy('codPrestamo','DESC')->get();
         return view('Prestamos.ListarPrestamos',compact('listaPrestamos'));
 
     }
@@ -40,8 +41,7 @@ class PrestamoController extends Controller
     //se llama desde javascript y retorna un MODAL
     public function Evaluar(Request $request){
         try {
-            Debug::mensajeSimple("El request es: ".json_encode($request->toArray()));
-        
+            DB::beginTransaction();
             $dni = $request->dni;
             $codRazonCredito = $request->codRazonCredito;
 
@@ -55,7 +55,7 @@ class PrestamoController extends Controller
             $patrimonioTotal = $importeInmuebles + $importeCapital;
             $importePrestamo = $request->importePrestamo;
             $tasaRetorno = RazonPrestamo::findOrFail($codRazonCredito)->tasa;
-             
+            
             $plazo = PlazoPago::findOrFail($request->codPlazo);
             $estadoPersona = Prestamo::buscarEnInfocorp($dni); //retorna un objeto EstadoPersona
             
@@ -69,18 +69,32 @@ class PrestamoController extends Controller
             ];     
             
             $evaluacionPrestamo = Prestamo::evaluarPrestamo($caracteristicas);
+            /* 
+                'nivelUtilidades' => $nivelUtilidades,
+                'riesgoPorEdad' => $riesgoPorEdad,
+                'riesgoNoRetorno' => $riesgoNoRetorno,
+
+                'nivelPrestamo' => $nivelPrestamo,
+                'nivelCapacidadFinanciera' => $nivelCapacidadFinanciera,
+                'nivelRespaldoFinanciero' => $nivelRespaldoFinanciero,
+                
+                'condicionEvaluacionPrestamo' => $condicionEvaluacionPrestamo
+            */
             
+
+            Debug::mensajeSimple(json_encode($evaluacionPrestamo));
 
             $tasaInteres = TasaInteres::getTasaActual()->valor;
             
             $listaCuotasPosibles = Prestamo::generarCuotas($plazo->valor,$importePrestamo,$tasaInteres);
-            
+            DB::commit();
             return view('Prestamos.Invocables.inv_EvaluacionPrestamo',
-                compact('evaluacionPrestamo','listaCuotasPosibles','estadoPersona'));
-        
+                compact('plazo','caracteristicas','evaluacionPrestamo','listaCuotasPosibles','estadoPersona'));
+            
         } catch (\Throwable $th) {
-            Debug::mensajeError("prestam controller",$th);
-            return "ERROR";
+            DB::rollback();
+            Debug::mensajeError("prestam controller EVALUAR",$th);
+            return "ERROR".$th;
         }
     }
 
@@ -95,110 +109,124 @@ class PrestamoController extends Controller
     */
     public function CrearPrestamo(Request $request){
         //return Debug::requestEnJS($request);
-
-        Debug::mensajeSimple("El request es: ".json_encode($request->toArray()));
-        
-        $dni = $request->DNI;
-        $codRazonCredito = $request->razonCredito;
-        
-        $ingresos = $request->ingresos;
-        $egresos = $request->egresos;
-        $importeInmuebles = $request->importeInmuebles;
-        $importeCapital = $request->importeCapital;
-
-        $utilidad = $ingresos-$egresos;
-        $edad = $request->edad;
-        $patrimonioTotal = $importeInmuebles + $importeCapital;
-        $importePrestamo = $request->importePrestamo;
-        
-        $tasaRetorno = RazonPrestamo::findOrFail($codRazonCredito)->tasa;
-       
-        $plazo = PlazoPago::findOrFail($request->codPlazo); 
-        $tasaInteres = TasaInteres::getTasaActual();
+        try {
+            DB::beginTransaction();
+            //Debug::mensajeSimple("El request es: ".json_encode($request->toArray()));
             
-      
-        $listaCuotasPosibles = Prestamo::generarCuotas($plazo->valor,$importePrestamo,$tasaInteres->valor);
-        $condicionMorosidad = Prestamo::buscarEnInfocorp($dni);
+            $dni = $request->DNI;
+            $codRazonCredito = $request->razonCredito;
             
-      
-        $caracteristicas = [
-            'utilidad'=>$utilidad,
-            'importePrestamo'=>$importePrestamo,
-            'edad'=>$edad,
-            'tasaRetorno' => $tasaRetorno,
-            'patrimonioTotal' => $patrimonioTotal,
-            'condicionMorosidad'=> $condicionMorosidad
-        ]; 
-        $evaluacionPrestamo = Prestamo::evaluarPrestamo($caracteristicas);
+            $ingresos = $request->ingresos;
+            $egresos = $request->egresos;
+            $importeInmuebles = $request->importeInmuebles;
+            $importeCapital = $request->importeCapital;
+
+            $utilidad = $ingresos-$egresos;
+            $edad = $request->edad;
+            $patrimonioTotal = $importeInmuebles + $importeCapital;
+            $importePrestamo = $request->importePrestamo;
+            
+            $tasaRetorno = RazonPrestamo::findOrFail($codRazonCredito)->tasa;
         
-        /* 
-        'nivelUtilidades' => $nivelUtilidades,
-        'riesgoPorEdad' => $riesgoPorEdad,
-        'riesgoNoRetorno' => $riesgoNoRetorno,
-        'nivelPrestamo' => $nivelPrestamo,
-        'nivelCapacidadFinanciera' => $nivelCapacidadFinanciera,
-        'nivelRespaldoFinanciero' => $nivelRespaldoFinanciero,
-        'condicionEvaluacionPrestamo' => $condicionEvaluacionPrestamo
-        */
-        $prestamo = new Prestamo();
-        $prestamo->cliente_dni = $dni;
-        $prestamo->cliente_nombres = $request->nombresApellidos;
-        $prestamo->cliente_utilidad = $utilidad;
-        $prestamo->cliente_edad = $edad;
-        $prestamo->cliente_patrimonioTotal = $patrimonioTotal;
-        $prestamo->cliente_ingresos = $ingresos ;
-        $prestamo->cliente_egresos = $egresos;
+            $plazo = PlazoPago::findOrFail($request->codPlazo); 
+            $tasaInteres = TasaInteres::getTasaActual();
+                
         
-        $prestamo->montoPrestado = $importePrestamo;
-        $prestamo->codRazon = $codRazonCredito;
-        $prestamo->valorCuota = $listaCuotasPosibles[0]['pago'];
-        $prestamo->montoPagado = 0;
-        $prestamo->saldoRestante = $importePrestamo; 
-        $prestamo->codTasaInteres = $tasaInteres->codTasaInteres;
-        $prestamo->codPlazo = $request->codPlazo;
+            $listaCuotasPosibles = Prestamo::generarCuotas($plazo->valor,$importePrestamo,$tasaInteres->valor);
+            $estadoPersona = Prestamo::buscarEnInfocorp($dni);
+                
+        
+            $caracteristicas = [
+                'utilidad'=>$utilidad,
+                'importePrestamo'=>$importePrestamo,
+                'edad'=>$edad,
+                'tasaRetorno' => $tasaRetorno,
+                'patrimonioTotal' => $patrimonioTotal,
+                'condicionMorosidad'=> $estadoPersona->nombre
+            ]; 
+            $evaluacionPrestamo = Prestamo::evaluarPrestamo($caracteristicas);
+            Debug::mensajeSimple(json_encode($evaluacionPrestamo));
+            /* 
+            'nivelUtilidades' => $nivelUtilidades,
+            'riesgoPorEdad' => $riesgoPorEdad,
+            'riesgoNoRetorno' => $riesgoNoRetorno,
+            'nivelPrestamo' => $nivelPrestamo,
+            'nivelCapacidadFinanciera' => $nivelCapacidadFinanciera,
+            'nivelRespaldoFinanciero' => $nivelRespaldoFinanciero,
+            'condicionEvaluacionPrestamo' => $condicionEvaluacionPrestamo
+            */
+            $prestamo = new Prestamo();
+            $prestamo->cliente_dni = $dni;
+            $prestamo->cliente_nombres = $request->nombresApellidos;
+            $prestamo->cliente_utilidad = $utilidad;
+            $prestamo->cliente_edad = $edad;
+            $prestamo->cliente_patrimonioTotal = $patrimonioTotal;
+            $prestamo->cliente_ingresos = $ingresos ;
+            $prestamo->cliente_egresos = $egresos;
+            
+            $prestamo->montoPrestado = $importePrestamo;
+            $prestamo->codRazon = $codRazonCredito;
+            $prestamo->valorCuota = $listaCuotasPosibles[1]['pago'];
+            $prestamo->montoPagado = 0;
+            $prestamo->saldoRestante = $importePrestamo; 
+            $prestamo->codTasaInteres = $tasaInteres->codTasaInteres;
+            $prestamo->codPlazo = $request->codPlazo;
 
-        $prestamo->evaluacion_nivelUtilidades = $evaluacionPrestamo['nivelUtilidades'];
-        $prestamo->evaluacion_riesgoPorEdad = $evaluacionPrestamo['riesgoPorEdad'];
-        $prestamo->evaluacion_riesgoNoRetorno = $evaluacionPrestamo['riesgoNoRetorno'];
-        $prestamo->evaluacion_nivelPrestamo = $evaluacionPrestamo['nivelPrestamo'];
-        $prestamo->evaluacion_nivelCapacidadFinanciera = $evaluacionPrestamo['nivelCapacidadFinanciera'];
-        $prestamo->evaluacion_nivelRespaldoFinanciero = $evaluacionPrestamo['nivelRespaldoFinanciero'];
-        $prestamo->evaluacion_condicionEvaluacionPrestamo = $evaluacionPrestamo['condicionEvaluacionPrestamo'];
-        $prestamo->fechaHoraCreacion = Carbon::now();
-        $prestamo->save();
+            $prestamo->evaluacion_nivelUtilidades = $evaluacionPrestamo['nivelUtilidades'];
+            $prestamo->evaluacion_riesgoPorEdad = $evaluacionPrestamo['riesgoPorEdad'];
+            $prestamo->evaluacion_riesgoNoRetorno = $evaluacionPrestamo['riesgoNoRetorno'];
+            $prestamo->evaluacion_nivelPrestamo = $evaluacionPrestamo['nivelPrestamo'];
+            $prestamo->evaluacion_nivelCapacidadFinanciera = $evaluacionPrestamo['nivelCapacidadFinanciera'];
+            $prestamo->evaluacion_nivelRespaldoFinanciero = $evaluacionPrestamo['nivelRespaldoFinanciero'];
+            $prestamo->evaluacion_condicionEvaluacionPrestamo = $evaluacionPrestamo['condicionEvaluacionPrestamo'];
 
 
-        //INSERTAMOS LAS CUOTAS
-        for ($i=1; $i <= $plazo->valor ; $i++) { 
-            $elementoCuota = $listaCuotasPosibles[$i]; //obtenemos del array
-            $nuevaCuota = new Cuota();
-            $nuevaCuota->codPrestamo = $prestamo->codPrestamo;
-            $nuevaCuota->item = $i;
-            $nuevaCuota->pago = $elementoCuota['pago'];
-            $nuevaCuota->montoInteres = $elementoCuota['montoInteres'];
-            $nuevaCuota->montoAmortizacion = $elementoCuota['montoAmortizacion'];
-            $nuevaCuota->saldoDeuda = $elementoCuota['saldoDeuda'];
-            $nuevaCuota->pagado=0;
-            $nuevaCuota->save();
+            $prestamo->fechaHoraCreacion = Carbon::now();
+            $prestamo->save();
+
+
+            //INSERTAMOS LAS CUOTAS
+            for ($i=1; $i <= $plazo->valor ; $i++) {
+                $elementoCuota = $listaCuotasPosibles[$i]; //obtenemos del array
+                $nuevaCuota = new Cuota();
+                $nuevaCuota->codPrestamo = $prestamo->codPrestamo;
+                $nuevaCuota->item = $i;
+                $nuevaCuota->pago = $elementoCuota['pago'];
+                $nuevaCuota->montoInteres = $elementoCuota['montoInteres'];
+                $nuevaCuota->montoAmortizacion = $elementoCuota['montoAmortizacion'];
+                $nuevaCuota->saldoDeuda = $elementoCuota['saldoDeuda'];
+                $nuevaCuota->pagado=0;
+                $nuevaCuota->save();
+            }
+            DB::commit();
+            return redirect()->route('Prestamos.VerPrestamo',$prestamo->codPrestamo)
+                ->with('datos','Préstamo creado exitosamente.');
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Debug::mensajeError("prestam controller EVALUAR",$th);
+            return "ERROR".$th;
         }
-        
-        return redirect()->route('Prestamos.VerPrestamo',$prestamo->codPrestamo)
-            ->with('datos','Préstamo creado exitosamente.');
-
     }
     
     public function ConsultarAPISunatDNI($dni){
         
+            try {
+                $token = Configuracion::tokenParaAPISunat;
+                $linkConsulta = "https://dniruc.apisperu.com/api/v1/dni/".$dni."?token=".$token;
                 
-            $token = Configuracion::tokenParaAPISunat;
-            $linkConsulta = "https://dniruc.apisperu.com/api/v1/dni/".$dni."?token=".$token;
-            
-            $resultado = file_get_contents($linkConsulta);
-            
+                $resultado = file_get_contents($linkConsulta);
+                // {"dni":"71208489","nombres":"DIEGO ERNESTO","apellidoPaterno":"VIGO","apellidoMaterno":"BRIONES","codVerifica":"3"}
+                
+                 
+                $vector =  json_decode($resultado, true);
+                $nombre = $vector['apellidoPaterno']." ".$vector['apellidoMaterno']." ".$vector['nombres'];
 
-            $vector =  json_decode($resultado, true);
-            if($vector['apellidoPaterno']!="")//si encontró
-                return $vector;
+                return RespuestaAPI::respuestaOk($nombre);
+            } catch (\Throwable $th) {
+                return RespuestaAPI::respuestaError("No se encontró a la persona.");
+            }
+            
             
             return 0;
 

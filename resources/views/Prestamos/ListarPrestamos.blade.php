@@ -53,7 +53,7 @@
                 <td>{{$prestamo->cliente_nombres}}</td>
                 <td>{{$prestamo->cliente_dni}}</td>
                 <td>
-                    {{$prestamo->fechaHoraCreacion}}
+                    {{$prestamo->getFechaHora()}}
                 </td>
                 <td>
                     {{$prestamo->montoPrestado}}

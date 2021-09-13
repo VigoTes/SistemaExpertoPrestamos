@@ -1,5 +1,4 @@
-test :- write( 'Prolog was called from PHP successfully.' ).
-
+test :- write( 'Prolog ha sido llamado exitosamente.' ). 
 
 % TODO EN MASCULINO Y MINUSCULAS
 
@@ -11,12 +10,17 @@ test :- write( 'Prolog was called from PHP successfully.' ).
         !.
     calcularNivelPrestamo(IMPORTE):-
         IMPORTE<20000,
-        IMPORTE>5000,
+        IMPORTE>=5000,
         write('medio'),
         !.
     calcularNivelPrestamo(IMPORTE):-
-        IMPORTE>20000,
-        write('alto').
+        IMPORTE>=20000,
+        IMPORTE<50000,
+        write('alto'),
+        !.
+    calcularNivelPrestamo(IMPORTE):-
+        IMPORTE>=50000,
+        write('altisimo').
 
 
 %Nivel utilidades
@@ -30,11 +34,16 @@ test :- write( 'Prolog was called from PHP successfully.' ).
         write('medio'),
         !.
     calcularNivelUtilidades(UTILIDAD):-
-        UTILIDAD>20000,
+        UTILIDAD>=15000,
         write('alto').
 
 % REISGO POR EDAD
     calcularRiesgoPorEdad(EDAD):-
+        EDAD<20,
+        write('no_suficiente'),
+        !.
+    calcularRiesgoPorEdad(EDAD):-
+        EDAD>=20,
         EDAD<65,
         write('suficiente'),
         !.
@@ -45,30 +54,30 @@ test :- write( 'Prolog was called from PHP successfully.' ).
 
 % TASA PROBABLE DE RETORNO
     calcularRiesgoNoRetorno(TASARETORNO):-
-        TASARETORNO<1,
+        TASARETORNO=<0.01,
         write('alto'),
         !.
     calcularRiesgoNoRetorno(TASARETORNO):-
-        TASARETORNO<5,
-        TASARETORNO>=1,
-        write('medio'),
+        TASARETORNO<0.05,
+        TASARETORNO>0.01,
+        write('regular'),
         !.
     calcularRiesgoNoRetorno(TASARETORNO):-
-        TASARETORNO>=5,
+        TASARETORNO>=0.05,
         write('bajo').
 
 %Respaldo financiero
     calcularRespaldoFinanciero(FactorRespaldo):-
-        FactorRespaldo<50000,
+        FactorRespaldo<20000,
         write('poco'),
         !.
     calcularRespaldoFinanciero(FactorRespaldo):-
-        FactorRespaldo<100000,
-        FactorRespaldo>=50000,
+        FactorRespaldo<80000,
+        FactorRespaldo>=20000,
         write('regular'),
         !.
     calcularRespaldoFinanciero(FactorRespaldo):-
-        FactorRespaldo>=100000,
+        FactorRespaldo>=80000,
         write('bastante').
 
 
@@ -91,13 +100,18 @@ test :- write( 'Prolog was called from PHP successfully.' ).
 
 % decision final
 
-    evaluarPrestamo(NivelPrestamo,NivelCapacidadFinanciera,NivelRespaldoFinanciero):-
-        tablaDecisionCompleta(NivelPrestamo,NivelCapacidadFinanciera,NivelRespaldoFinanciero,'aprobado'),
+    evaluarPrestamo(NivelRespaldoFinanciero,NivelCapacidadFinanciera,NivelPrestamo):-
+        tablaDecisionCompleta(NivelRespaldoFinanciero,NivelCapacidadFinanciera,NivelPrestamo,'aprobado'),
         write('aprobado'),
         !.
-    evaluarPrestamo(NivelPrestamo,NivelCapacidadFinanciera,NivelRespaldoFinanciero):-
-        tablaDecisionCompleta(NivelPrestamo,NivelCapacidadFinanciera,NivelRespaldoFinanciero,'no_aprobado'),
+    evaluarPrestamo(NivelRespaldoFinanciero,NivelCapacidadFinanciera,NivelPrestamo):-
+        tablaDecisionCompleta(NivelRespaldoFinanciero,NivelCapacidadFinanciera,NivelPrestamo,'no_aprobado'),
+        write('no_aprobado'),
+        !.
+    evaluarPrestamo(_,_,'altisimo'):-
         write('no_aprobado').
+% LOS CRÉDITOS ALTISIMOS (MAYORES A 50 000 NO APROBAMOS)
+    
 
 
 % TABLA GRANDE DE CAPACIDAD FINANCIERA
@@ -108,7 +122,7 @@ test :- write( 'Prolog was called from PHP successfully.' ).
     tablaCapacidadFinanciera('bajo','con_antecedentes','no_suficiente','bajo','pequeno').%A4
     tablaCapacidadFinanciera('bajo','con_antecedentes','no_suficiente','regular','pequeno').%A5
     tablaCapacidadFinanciera('bajo','con_antecedentes','no_suficiente','alto','pequeno').%A6
-    tablaCapacidadFinanciera('bajo','sin_antecedentes','suficiente','bajo','mediano').%A7
+    tablaCapacidadFinanciera('bajo','sin_antecedentes','suficiente','bajo','pequeno').%A7
     tablaCapacidadFinanciera('bajo','sin_antecedentes','suficiente','regular','mediano').%A8
     tablaCapacidadFinanciera('bajo','sin_antecedentes','suficiente','alto','mediano').%A9
     tablaCapacidadFinanciera('bajo','sin_antecedentes','no_suficiente','bajo','pequeno').%A10
