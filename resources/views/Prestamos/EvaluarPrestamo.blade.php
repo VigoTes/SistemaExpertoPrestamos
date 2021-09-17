@@ -35,13 +35,13 @@
     @csrf
     <div class="container">
         <div class="row">
-            <div class="col-2" style="">
+            <div class="" style="width:5%">
                 
             
             </div>
             
 
-            <div class="col" style="">
+            <div class="" style="width:90%">
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -143,7 +143,7 @@
                                         </div>
 
                                         <div class="w-100"></div>
-                                        <div class="col text-center">
+                                        <div class="col">
                                                 <label class="" style="">Monto solicitado:</label>
                                                 <input type="number" class="form-control text-right" id="importePrestamo" name="importePrestamo" >
                                         </div>
@@ -192,7 +192,7 @@
             </div>
 
 
-            <div class="col-2" >
+            <div class="" style="width:5%" >
             
             
             </div>
