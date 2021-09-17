@@ -59,7 +59,15 @@
 						<input id="ingresar" name="ingresar" type="submit" class="button" value="Ingresar">
 					</div>
 					<div class="hr"></div>
-					 
+					<div style="text-align: center; color:rgba(140, 255, 111, 0.603)">
+						Vigo Briones
+						- Gutierrez Uriol
+						- Olivares Gutierrez 
+						<br>
+						Rodriguez Paredes 
+						- Franco Valladolid
+					</div>
+					
 
 				</div>
  

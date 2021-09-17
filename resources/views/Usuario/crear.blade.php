@@ -61,7 +61,7 @@
                             Registrar
                         </button> 
                         
-                        <a href="{{route('Persona.listar')}}" class='btn btn-info float-left'>
+                        <a href="{{route('Usuario.listar')}}" class='btn btn-info float-left'>
                             <i class="fas fa-arrow-left"></i> 
                             Regresar al Menú
                         </a>

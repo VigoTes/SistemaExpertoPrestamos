@@ -32,15 +32,15 @@
             </div><!-- /.card-header -->
             <div class="card-body">
                     <div class="row">
-                    <div class="col">
+                    <div class="col-3">
                         <label for="">DNI</label>
-                        <input type="text" class="form-control" readonly value="{{$prestamo->cliente_dni}}">
+                        <input style="" type="text" class="form-control" readonly value="{{$prestamo->cliente_dni}}">
                     </div>
                     <div class="col">
                         <label for="">Nombres</label>
                         <input type="text" class="form-control" readonly  value="{{$prestamo->cliente_nombres}}">
                     </div>
-                    <div class="col">
+                    <div class="col-2">
                         <label for="">Edad</label>
                         <input type="text" class="form-control" readonly  value="{{$prestamo->cliente_edad}}">
                     </div>

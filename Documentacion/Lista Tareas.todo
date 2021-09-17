@@ -16,19 +16,24 @@ Actividades 1:
     ✔ CRUD de persona y estado_persona para simular infocorp @done(08-09-21 10:28)
     ✔ Investigar conexión o API para consultar morosidad de INFOCORP NO SE PUEDE XD @done(05-09-21 19:17)
     ✔ Hacer la api de conexion para evaluar prestamo @done(08-09-21 10:28)
-   
+    
     ✔ Hacer TRY CATCH en todos los metodos @done(12-09-21 22:22)
     
 Video funcionamiento externo:
     Lo grabaremos con Meet, cada uno compartirá pantalla del sistema 
-    ☐ Introducción (para que sirve el software, usamos prolog con php, una API de consulta a reniec, simulacion de consulta a infocorp)
-    ☐ Login y gestor de usuarios 
-    ☐ Vista evaluar y generar prestamo 
-    ☐ Gráfico de razonamiento
-    ☐ Listar prestamos y ver estado de cada uno 
+    ☐ 1. Introducción (para que sirve el software, usamos prolog con php, una API de consulta a reniec, simulacion de consulta a infocorp) CHINA
+    ☐ 2. Login y gestor de usuarios RENZO
+    ☐ 3. Vista evaluar y generar prestamo VIGO  
+    ☐ 4. Gráfico de razonamiento FELIX
+    ☐ 5. Simulacion de infocorp MARSKY 
+    
+
 Video explicando código:
-    ☐ Conexión con prolog
-    ☐ motor de razonamiento
-    ☐ Consulta INFOCORP
-    ☐ Consulta reniec
+    ✔ 1. Vista de evaluar prestamo (jquery)  VIGO @done(16-09-21 21:04)
+    ✔ 2. Controller Evaluar prestamo prestamo VIGO @done(16-09-21 21:04)
+    ✔ 3. Prestamo::evaluarPrestamo VIGO @done(16-09-21 21:04)
+    ✔ 4. Conexión con prolog (clase PrologExecuter) FELIX @done(16-09-21 21:04)
+    ✔ 2. archivo motor de razonamiento FELIX @done(16-09-21 21:04)
+    ✔ 3. Consulta INFOCORP (Prestamo::buscarEnInfocorp) FELIX @done(16-09-21 21:04)
+    ✔ 4. Consulta reniec PrestamoController->ConsultarAPISunatDNI FELIX @done(16-09-21 21:04)
 
