@@ -29,8 +29,10 @@ class Configuracion extends Model
     */
     
     //https://dniruc.apisperu.com/api/v1/ruc/
-    const tokenParaAPISunat = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1hcmFjc29mdEBnbWFpbC5jb20ifQ.n5ullrY3C430Q8IHYmxk38bidOi7sLDuB2n_ULc63F0";
-  
+    public static function tokenParaAPISunat(){
+        return env('tokenParaAPISunat');
+    } 
+
     public static function inyectar(){
         return !Configuracion::enProduccion;
     }

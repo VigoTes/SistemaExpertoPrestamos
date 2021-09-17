@@ -212,7 +212,7 @@ class PrestamoController extends Controller
     public function ConsultarAPISunatDNI($dni){
         
             try {
-                $token = Configuracion::tokenParaAPISunat;
+                $token = Configuracion::tokenParaAPISunat();
                 $linkConsulta = "https://dniruc.apisperu.com/api/v1/dni/".$dni."?token=".$token;
                 
                 $resultado = file_get_contents($linkConsulta);
